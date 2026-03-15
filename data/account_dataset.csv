@@ -1,0 +1,11 @@
+followers,following,posts,account_age_days,label
+1500,200,120,800,real
+2000,300,150,900,real
+1800,250,110,700,real
+50,1000,2,30,fake
+30,900,1,20,fake
+80,1200,3,15,fake
+500,400,50,300,real
+70,800,4,25,fake
+600,350,60,450,real
+90,700,3,40,fake

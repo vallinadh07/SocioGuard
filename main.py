@@ -1,16 +1,19 @@
 from analyzers.message_analyzer import MessageAnalyzer
 from analyzers.link_analyzer import LinkAnalyzer
+from analyzers.account_analyzer import AccountAnalyzer
 
 print("SocioGuard Security Analyzer")
 
-# Initialize analyzers
 message_analyzer = MessageAnalyzer()
 link_analyzer = LinkAnalyzer()
+account_analyzer = AccountAnalyzer()
 
 message_analyzer.train("data/message_dataset.csv")
+account_analyzer.train("data/account_dataset.csv")
 
 print("\n1. Analyze Message")
 print("2. Analyze Link")
+print("3. Analyze Account")
 
 choice = input("\nChoose option: ")
 
@@ -22,6 +25,7 @@ if choice == "1":
     print("\nMessage Result:", label)
     print("Confidence:", confidence, "%")
 
+
 elif choice == "2":
 
     url = input("\nEnter URL: ")
@@ -29,7 +33,20 @@ elif choice == "2":
 
     print("\nLink Status:", risk)
 
-    if reasons:
-        print("Reasons:")
-        for r in reasons:
-            print("-", r)
+    for r in reasons:
+        print("-", r)
+
+
+elif choice == "3":
+
+    followers = int(input("Followers: "))
+    following = int(input("Following: "))
+    posts = int(input("Posts: "))
+    age = int(input("Account Age (days): "))
+
+    label, confidence = account_analyzer.predict(
+        followers, following, posts, age
+    )
+
+    print("\nAccount Status:", label)
+    print("Confidence:", confidence, "%")
