@@ -1,14 +1,35 @@
 from analyzers.message_analyzer import MessageAnalyzer
+from analyzers.link_analyzer import LinkAnalyzer
 
-print("SocioGuard - Message Analyzer")
+print("SocioGuard Security Analyzer")
 
-analyzer = MessageAnalyzer()
+# Initialize analyzers
+message_analyzer = MessageAnalyzer()
+link_analyzer = LinkAnalyzer()
 
-analyzer.train("data/message_dataset.csv")
+message_analyzer.train("data/message_dataset.csv")
 
-message = input("\nEnter message: ")
+print("\n1. Analyze Message")
+print("2. Analyze Link")
 
-label, confidence = analyzer.predict(message)
+choice = input("\nChoose option: ")
 
-print("\nResult:", label)
-print("Confidence:", confidence, "%")
+if choice == "1":
+
+    message = input("\nEnter message: ")
+    label, confidence = message_analyzer.predict(message)
+
+    print("\nMessage Result:", label)
+    print("Confidence:", confidence, "%")
+
+elif choice == "2":
+
+    url = input("\nEnter URL: ")
+    risk, reasons = link_analyzer.analyze(url)
+
+    print("\nLink Status:", risk)
+
+    if reasons:
+        print("Reasons:")
+        for r in reasons:
+            print("-", r)
