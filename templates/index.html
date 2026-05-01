@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socio Guard - Social Media Security</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🛡️ Socio Guard</h1>
+        <p>AI-Powered Social Media & Scam Detection System</p>
+    </header>
+
+    <div class="container">
+        <!-- Social Media Analyzer -->
+        <div class="card">
+            <h2>📱 Social Media Analyzer</h2>
+            <p>Check if a social media account is fake or genuine</p>
+            
+            <div class="input-group">
+                <label>Platform:</label>
+                <select id="platform">
+                    <option value="instagram">📸 Instagram</option>
+                    <option value="twitter">🐦 Twitter/X</option>
+                    <option value="facebook">📘 Facebook</option>
+                    <option value="linkedin">💼 LinkedIn</option>
+                    <option value="tiktok">🎵 TikTok</option>
+                    <option value="telegram">📨 Telegram</option>
+                    <option value="other">🌐 Other</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Username:</label>
+                <input type="text" id="username" placeholder="@username">
+            </div>
+            
+            <div class="input-group">
+                <label>Followers Count:</label>
+                <input type="number" id="followers" placeholder="Number of followers">
+            </div>
+            
+            <div class="input-group">
+                <label>Following Count:</label>
+                <input type="number" id="following" placeholder="Number following">
+            </div>
+            
+            <div class="input-group">
+                <label>Total Posts:</label>
+                <input type="number" id="posts" placeholder="Total posts">
+            </div>
+            
+            <div class="input-group">
+                <label>Account Age (days):</label>
+                <input type="number" id="account_age" placeholder="Days since account created">
+            </div>
+            
+            <div class="input-group">
+                <label>Has Profile Picture?</label>
+                <select id="has_profile_pic">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Has Bio?</label>
+                <select id="has_bio">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label>Avg Likes Per Post:</label>
+                <input type="number" id="avg_likes" placeholder="Average likes">
+            </div>
+            
+            <div class="input-group">
+                <label>Avg Comments Per Post:</label>
+                <input type="number" id="avg_comments" placeholder="Average comments">
+            </div>
+            
+            <!-- Multi-Platform Correlation Section (PATENT FEATURE) -->
+            <div class="input-group">
+                <label style="font-weight: bold; color: #764ba2;">🔗 Cross-Platform Correlation (Unique Feature)</label>
+                <small style="color: #666; display: block; margin-bottom: 10px;">
+                    Add multiple social media profiles for the SAME person to detect synthetic identities
+                </small>
+            </div>
+
+            <div id="platforms-container">
+                <!-- Platform 1 -->
+                <div class="platform-entry" id="platform-1">
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #e0e0e0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <strong>📱 Platform 1</strong>
+                            <button type="button" class="remove-platform" onclick="removePlatform(1)" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 5px; display: none;">✖ Remove</button>
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                            <select class="platform-select" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <option value="instagram">📸 Instagram</option>
+                                <option value="twitter">🐦 Twitter/X</option>
+                                <option value="facebook">📘 Facebook</option>
+                                <option value="linkedin">💼 LinkedIn</option>
+                                <option value="tiktok">🎵 TikTok</option>
+                            </select>
+                            <input type="text" class="username-input" placeholder="Username" style="flex: 2; padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                            <input type="number" class="platform-followers" placeholder="Followers" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="number" class="platform-following" placeholder="Following" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="number" class="platform-posts" placeholder="Total Posts" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="number" class="platform-age" placeholder="Account Age (days)" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <select class="platform-pic" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <option value="yes">Has Profile Pic ✅</option>
+                                <option value="no">No Profile Pic ❌</option>
+                            </select>
+                            <select class="platform-bio" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                                <option value="yes">Has Bio ✅</option>
+                                <option value="no">No Bio ❌</option>
+                            </select>
+                            <input type="number" class="platform-likes" placeholder="Avg Likes" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                            <input type="number" class="platform-comments" placeholder="Avg Comments" style="padding: 8px; border: 1px solid #ddd; border-radius: 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" onclick="addPlatform()" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); margin-bottom: 15px; width: 100%;">
+                + Add Another Platform
+            </button>
+
+            <button onclick="analyzeCrossPlatform()" style="background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); margin-bottom: 15px; width: 100%;">
+                🔗 Analyze Cross-Platform (Patent Feature)
+            </button>
+
+            <div id="cross-platform-result" class="result"></div>
+
+            <hr style="margin: 20px 0;">
+
+            <button onclick="analyzeProfile()" style="width: 100%;">📱 Analyze Single Platform</button>
+            
+            <div id="profile-result" class="result"></div>
+        </div>
+
+        <!-- Text & Link Analyzer -->
+        <div class="card">
+            <h2>🔗 Text & Link Analyzer</h2>
+            <p>Check if a message or link is a scam/phishing attempt</p>
+            
+            <div class="toggle-buttons">
+                <button class="toggle-btn active" onclick="setContentType('text')">📝 Text</button>
+                <button class="toggle-btn" onclick="setContentType('link')">🔗 Link</button>
+            </div>
+            
+            <div class="input-group">
+                <label id="content-label">Paste Text Here:</label>
+                <textarea id="content-input" rows="4" placeholder="Paste suspicious message or link here..."></textarea>
+            </div>
+            
+            <button onclick="analyzeContent()">Analyze Content</button>
+            
+            <!-- Community Stats Button -->
+            <button onclick="viewScamStats()" style="background: linear-gradient(135deg, #17a2b8 0%, #138496 100%); margin-top: 10px; width: 100%;">
+                📊 View Community Scam Statistics
+            </button>
+            
+            <div id="content-result" class="result"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
